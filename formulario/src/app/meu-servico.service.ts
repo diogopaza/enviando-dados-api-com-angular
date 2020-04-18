@@ -1,31 +1,19 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MeuServicoService {
-  contatos = [{
-    id: "123",
-    nome: "diogo paza",
-    email: "diogo@uol.com"
-  },
-  {
-    id: "456",
-    nome: "joao",
-    email: "joao@uol.com"
-  },
-  {
-    id: "222",
-    nome: "Augustinho",
-    email: "augusto@terra.com.br"
-  }
-  ]
+  
+  url = "http://localhost:3000/"
+  constructor(http: HttpClient) {}
 
   adicionarContato(contato) {
-    this.contatos.push(contato)
+   // this.contatos.push(contato)
   }
   getContatos() {
-    return this.contatos;
+    return this.http.get(this.url)
   }
 
 
