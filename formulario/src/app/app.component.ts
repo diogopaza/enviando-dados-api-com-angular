@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-
+import { FormGroup } from '@angular/forms';
 
 import { MeuServicoService } from './meu-servico.service';
-import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
@@ -11,11 +10,8 @@ import { FormGroup } from '@angular/forms';
 })
 export class AppComponent {
   title = 'formulario';
-  templateUrl: any;
   contatos: Array<any>;
   contato: any;
-  teste: Array<any>
-  public servico: MeuServicoService
 
   constructor(private meuServicoService: MeuServicoService) { }
 
@@ -25,12 +21,16 @@ export class AppComponent {
       nome: "",
       email: ""
     }
-    this.contatos = this.meuServicoService.getContatos()
+    this.meuServicoService.getContatos().subscribe(result => {
+      this.contatos = result
+    })
   }
 
   criar(frm) {
-    this.meuServicoService.adicionarContato(this.contato)
-   // this.contatos = this.meuServicoService.getContatos()
+    this.meuServicoService.adicionarContato(this.contato).subscribe(resposta => {
+      this.contatos.push(resposta)
+      frm.reset()
+    })
   }
 
 

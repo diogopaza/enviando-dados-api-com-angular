@@ -5,15 +5,17 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class MeuServicoService {
-  
+
   url = "http://localhost:3000/"
-  constructor(http: HttpClient) {}
+  urlAdd = "http://localhost:3000/add"
+  constructor(private http: HttpClient) { }
 
   adicionarContato(contato) {
-   // this.contatos.push(contato)
+    console.log("contato no serviço ", contato)
+    return this.http.post<any>(this.urlAdd, contato)
   }
   getContatos() {
-    return this.http.get(this.url)
+    return this.http.get<Array<any>>(this.url)
   }
 
 
